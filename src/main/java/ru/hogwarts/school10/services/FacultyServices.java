@@ -2,6 +2,7 @@ package ru.hogwarts.school10.services;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school10.model.Faculty;
+import ru.hogwarts.school10.model.Student;
 import ru.hogwarts.school10.repositories.FacultyRepositoriy;
 
 import java.util.Collection;
@@ -15,26 +16,31 @@ public class FacultyServices {
 
     private FacultyRepositoriy facultyRepositoriy;
 
-    public Faculty getFaculty (long id){
-       return facultyRepositoriy.getReferenceById(id);
+    public Faculty getFaculty(long id) {
+        return facultyRepositoriy.getReferenceById(id);
     }
 
-    public Faculty createFaculty (Faculty faculty){
-        return  facultyRepositoriy.save(faculty);
-    }
-
-    public Faculty editFaculty (Faculty faculty){
+    public Faculty createFaculty(Faculty faculty) {
         return facultyRepositoriy.save(faculty);
     }
-public void removeFaculty (long id){
+
+    public Faculty editFaculty(Faculty faculty) {
+        return facultyRepositoriy.save(faculty);
+    }
+
+    public void removeFaculty(long id) {
         facultyRepositoriy.deleteById(id);
-}
+    }
 
-public List<Faculty> findAllFaculty (Faculty faculty){
+    public List<Faculty> findAllFaculty(Faculty faculty) {
         return facultyRepositoriy.findAllFaculty(faculty);
-}
+    }
 
-public Collection <Faculty> findColorFaculty (String color){
+    public Collection<Faculty> findColorFaculty(String color) {
         return facultyRepositoriy.findByColorContainsIgnoreCase(color);
-}
+    }
+
+    public Faculty findFacultyByStudent(Student student) {
+        return facultyRepositoriy.findFacultyByStudents(student);
+    }
 }

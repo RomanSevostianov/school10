@@ -1,22 +1,20 @@
 package ru.hogwarts.school10.model;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 
-
-import javax.swing.text.Position;
 import java.util.Objects;
+
 @Entity
 
 public class Student {
-   @Id
-   @GeneratedValue
-private Long id;
-private String name;
-private int age;
+    @Id
+    @GeneratedValue
+    private Long id;
+    private String name;
+    private int age;
 
     @ManyToOne
-    @JoinColumn(name = "faculty_id")
+    @JoinColumn(name = "faculty_id") // индикатор присутствия студента на факультете
     private Faculty faculty;
 
     public Student(Long id, String name, int age) {
