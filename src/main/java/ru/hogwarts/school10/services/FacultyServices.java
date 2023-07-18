@@ -14,7 +14,7 @@ public class FacultyServices {
         this.facultyRepositoriy = facultyRepositoriy;
     }
 
-    private FacultyRepositoriy facultyRepositoriy;
+    private final FacultyRepositoriy facultyRepositoriy;
 
     public Faculty getFaculty(long id) {
         return facultyRepositoriy.getReferenceById(id);
@@ -32,15 +32,15 @@ public class FacultyServices {
         facultyRepositoriy.deleteById(id);
     }
 
-    public List<Faculty> findAllFaculty(Faculty faculty) {
-        return facultyRepositoriy.findAllFaculty(faculty);
+    public Collection<Faculty> findAllFaculty() {
+        return facultyRepositoriy.findAll();
     }
 
     public Collection<Faculty> findColorFaculty(String color) {
         return facultyRepositoriy.findByColorContainsIgnoreCase(color);
     }
 
-    public Faculty findFacultyByStudent(Student student) {
+    public Faculty findFacultyByStudent(List<Student> student) {
         return facultyRepositoriy.findFacultyByStudents(student);
     }
 }

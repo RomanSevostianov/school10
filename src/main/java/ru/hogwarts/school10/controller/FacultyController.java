@@ -47,12 +47,12 @@ public class FacultyController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Faculty>> findAllFaculty(@RequestBody Faculty faculty) {
-        return ResponseEntity.ok(facultyServices.findAllFaculty(faculty));
+    public ResponseEntity<Collection<Faculty>> findAllFaculty() {
+        return ResponseEntity.ok(facultyServices.findAllFaculty());
     }
 
     @GetMapping("{faculty}")
-    public ResponseEntity<Faculty> findFacultyByStudent(@PathVariable Student student) {
+    public ResponseEntity<Faculty> findFacultyByStudent(@RequestBody List<Student> student) {
         return ResponseEntity.ok(facultyServices.findFacultyByStudent(student));
     }
 }

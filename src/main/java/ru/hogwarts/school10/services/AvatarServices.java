@@ -58,7 +58,7 @@ public class AvatarServices {
         avatar.setFilePath(filePath.toString()); //указываем путь к файлу, который сохранили на диске
         avatar.setFileSize(avatarFile.getSize());//указываем размер
         avatar.setMediaType(avatarFile.getContentType());//тип файла
-        avatar.setPreview(generateImagePreview(filePath));
+        avatar.setPreview(generateImagePreview(filePath));//уменьшаем
 
         avatarRepositoriy.save(avatar);
 
