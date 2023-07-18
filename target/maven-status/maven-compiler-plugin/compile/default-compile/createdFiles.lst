@@ -1,0 +1,13 @@
+ru\hogwarts\school10\model\Avatar.class
+ru\hogwarts\school10\controller\AvatarController.class
+ru\hogwarts\school10\School10Application.class
+ru\hogwarts\school10\controller\StudentController.class
+ru\hogwarts\school10\controller\FacultyController.class
+ru\hogwarts\school10\repositories\AvatarRepositoriy.class
+ru\hogwarts\school10\model\Faculty.class
+ru\hogwarts\school10\model\Student.class
+ru\hogwarts\school10\repositories\StudentRepositoriy.class
+ru\hogwarts\school10\services\FacultyServices.class
+ru\hogwarts\school10\services\StudentServices.class
+ru\hogwarts\school10\repositories\FacultyRepositoriy.class
+ru\hogwarts\school10\services\AvatarServices.class
