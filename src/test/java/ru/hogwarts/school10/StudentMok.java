@@ -34,7 +34,7 @@ public class StudentMok {
     @MockBean //создаем моки репозиторий
     private StudentRepositoriy studentRepositoriy;
 
-    Collection<Student> mockList = Mockito.spy(new ArrayList<Student>());
+
 
     @SpyBean //бин без изменения
     private StudentServices studentServices;
@@ -94,6 +94,8 @@ public class StudentMok {
     @Test
     public void getFindAllTest() throws Exception {
 
+       Collection<Student> mockList = Mockito.spy(new ArrayList<Student>());
+
         Long id = 10L;
         String name = "Nikita";
         int age = 35;
@@ -105,6 +107,7 @@ public class StudentMok {
         userObject.put("age", age);
 
         Student student = new Student();
+
         student.setId(id);
         student.setName(name);
         student.setAge(age);
