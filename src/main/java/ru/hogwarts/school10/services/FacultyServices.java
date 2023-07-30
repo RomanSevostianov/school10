@@ -43,4 +43,5 @@ public class FacultyServices {
     public Faculty findFacultyByStudent(List<Student> student) {
         return facultyRepositoriy.findFacultyByStudents(student);
     }
+
 }

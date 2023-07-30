@@ -6,6 +6,8 @@ import ru.hogwarts.school10.model.Faculty;
 import ru.hogwarts.school10.model.Student;
 import ru.hogwarts.school10.services.StudentServices;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("student")
 public class StudentController {
@@ -14,6 +16,13 @@ public class StudentController {
 
     public StudentController(StudentServices studentServices) {
         this.studentServices = studentServices;
+    }
+
+    @GetMapping("{age}")
+    public ResponseEntity<Student> findStudentAge (@PathVariable int age){
+        studentServices.getStudentAge(age);
+        return ResponseEntity.ok().build();
+
     }
 
     @GetMapping("{id}")
@@ -34,8 +43,9 @@ public class StudentController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("{id}")
 
+
+    @DeleteMapping("{id}")
     public ResponseEntity<Student> removeStudent(@PathVariable long id) {
         studentServices.deleteStudent(id);
         return ResponseEntity.ok().build();
@@ -46,6 +56,7 @@ public class StudentController {
         studentServices.getAllStudent(student);
         return ResponseEntity.ok().build();
     }
+
 
     @GetMapping
     public ResponseEntity findAgeBeetWeen(@RequestParam Integer min, @RequestParam Integer max) {
@@ -59,5 +70,22 @@ public class StudentController {
     public ResponseEntity findAllStudentFaculty(@PathVariable Faculty faculty) {
         studentServices.getAllStudentFaculty(faculty);
         return ResponseEntity.ok().build();
+    }
+
+
+    @GetMapping("/count")
+    public int getCountOfStudent() {
+        return studentServices.getCountOfStudent();
+    }
+
+    @GetMapping("/avarageAge")
+    public double getAverageAgeOfStudent() {
+        return studentServices.getAverageAgeOfStudent();
+    }
+
+
+    @GetMapping("/lastStudent")
+    public List<Student> getLastStudent(@RequestParam (value = "count",defaultValue = "5")int count) {
+        return studentServices.getLastStudent(Math.abs(count));
     }
 }
