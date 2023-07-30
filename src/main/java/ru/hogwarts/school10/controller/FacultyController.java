@@ -3,56 +3,50 @@ package ru.hogwarts.school10.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school10.model.Faculty;
-import ru.hogwarts.school10.model.Student;
-import ru.hogwarts.school10.services.FacultyServices;
+import ru.hogwarts.school10.services.FacultyService;
 
 import java.util.Collection;
-import java.util.List;
 
 @RestController
 @RequestMapping("faculty")
 public class FacultyController {
 
-    private FacultyServices facultyServices;
+   final private FacultyService facultyService;
 
-    public FacultyController(FacultyServices facultyServices) {
-        this.facultyServices = facultyServices;
+    public FacultyController(FacultyService facultyService) {
+        this.facultyService = facultyService;
     }
 
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFacultyId(@PathVariable long id) {
-        return ResponseEntity.ok(facultyServices.getFaculty(id));
+        return ResponseEntity.ok(facultyService.getFaculty(id));
     }
 
     @PostMapping
     public ResponseEntity<Faculty> createFaculty(@RequestBody Faculty faculty) {
-        return ResponseEntity.ok(facultyServices.createFaculty(faculty));
+        return ResponseEntity.ok(facultyService.createFaculty(faculty));
     }
 
     @PutMapping
     public ResponseEntity<Faculty> upDateFaculty(@RequestBody Faculty faculty) {
-        return ResponseEntity.ok(facultyServices.editFaculty(faculty));
+        return ResponseEntity.ok(facultyService.editFaculty(faculty));
     }
 
     @DeleteMapping("{id}")
     public void deleteFaculty(@PathVariable long id) {
-        facultyServices.removeFaculty(id);
+        facultyService.removeFaculty(id);
     }
 
 
     @GetMapping("{color}")
 
     public ResponseEntity<Collection<Faculty>> findFacultyColor(@PathVariable String color) {
-        return ResponseEntity.ok(facultyServices.findColorFaculty(color));
+        return ResponseEntity.ok(facultyService.findColorFaculty(color));
     }
 
     @GetMapping
     public ResponseEntity<Collection<Faculty>> findAllFaculty() {
-        return ResponseEntity.ok(facultyServices.findAllFaculty());
+        return ResponseEntity.ok(facultyService.findAllFaculty());
     }
 
-    @GetMapping("{faculty}")
-    public ResponseEntity<Faculty> findFacultyByStudent(@RequestBody List<Student> student) {
-        return ResponseEntity.ok(facultyServices.findFacultyByStudent(student));
-    }
 }

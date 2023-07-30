@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school10.model.Avatar;
 import ru.hogwarts.school10.model.Student;
-import ru.hogwarts.school10.repositories.AvatarRepositoriy;
-import ru.hogwarts.school10.repositories.StudentRepositoriy;
+import ru.hogwarts.school10.repositories.AvatarRepository;
+import ru.hogwarts.school10.repositories.StudentRepository;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -21,22 +21,22 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
 @Transactional
-public class AvatarServices {
+public class AvatarService {
 
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
-    private final StudentServices studentServices;
-    private final AvatarRepositoriy avatarRepositoriy;
-    private StudentRepositoriy studentRepositoriy;
+    private final StudentService studentService;
+    private final AvatarRepository avatarRepositoriy;
+    private StudentRepository studentRepositoriy;
 
-    public AvatarServices(StudentServices studentServices, AvatarRepositoriy avatarRepositoriy) {
-        this.studentServices = studentServices;
+    public AvatarService(StudentService studentService, AvatarRepository avatarRepositoriy) {
+        this.studentService = studentService;
         this.avatarRepositoriy = avatarRepositoriy;
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
-        Student student = studentServices.getStudentId(studentId);
+        Student student = studentService.getStudentId(studentId);
 
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtensions(avatarFile.getOriginalFilename()));
 

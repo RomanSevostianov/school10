@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.hogwarts.school10.controller.FacultyController;
 import ru.hogwarts.school10.model.Faculty;
-import ru.hogwarts.school10.services.FacultyServices;
+import ru.hogwarts.school10.services.FacultyService;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class FacultyMokTest {
     @Autowired
     MockMvc mockMvc;
     @MockBean
-    FacultyServices facultyServices;
+    FacultyService facultyService;
 
     @MockBean
     FacultyController facultyController;
@@ -45,7 +45,7 @@ public class FacultyMokTest {
         faculty.setColor("grey");
         faculty.setName("Googf");
 
-        when(facultyServices.getFaculty(1)).thenReturn(faculty);
+        when(facultyService.getFaculty(1)).thenReturn(faculty);
 
         ResultActions resultActions =
                 mockMvc.perform(get("faculty/1") //Он отправляет запрос get с некоторыми JSON данными и заголовком авторизации в faculty/1
@@ -67,7 +67,7 @@ public class FacultyMokTest {
         faculty.setColor("blue");
         faculty.setName("Lookiy");
 
-        when(facultyServices.createFaculty(faculty)).thenReturn(faculty);
+        when(facultyService.createFaculty(faculty)).thenReturn(faculty);
 
         ResultActions resultActions  =
                 mockMvc.perform(post("/faculty")
@@ -99,7 +99,7 @@ public class FacultyMokTest {
 
         List<Faculty> listFaculty = List.of(f1, f2);
 
-        when(facultyServices.findColorFaculty(anyString())).thenReturn(listFaculty);
+        when(facultyService.findColorFaculty(anyString())).thenReturn(listFaculty);
         JSONArray jsonA = new JSONArray();
         jsonA.put(f1);
         jsonA.put(f2);

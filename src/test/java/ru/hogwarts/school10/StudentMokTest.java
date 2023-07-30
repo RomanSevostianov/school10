@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import ru.hogwarts.school10.controller.StudentController;
 import ru.hogwarts.school10.model.Student;
-import ru.hogwarts.school10.services.StudentServices;
+import ru.hogwarts.school10.services.StudentService;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class StudentMokTest {
     @Autowired
     MockMvc mockMvc;
     @MockBean
-    StudentServices studentServices;
+    StudentService studentService;
 
     @MockBean
     StudentController studentController;
@@ -46,7 +46,7 @@ public class StudentMokTest {
         student.setName("Harry Potter");
         student.setAge(25);
 
-        when(studentServices.createStudent(student)).thenReturn(student);
+        when(studentService.createStudent(student)).thenReturn(student);
 
         ResultActions resultActions =
                 mockMvc.perform(post("/student")
@@ -73,7 +73,7 @@ public class StudentMokTest {
         student.setName(name);
         student.setAge(age);
 
-        when(studentServices.getStudentId(id)).thenReturn(student);
+        when(studentService.getStudentId(id)).thenReturn(student);
 
         ResultActions resultActions =
                 mockMvc.perform(
@@ -96,7 +96,7 @@ public class StudentMokTest {
         Student student2 = new Student(2L, "Masha", 30);
 
         List<Student> listStudent = List.of(student1, student2);
-        when(studentServices.getStudentAge(anyInt())).thenReturn(listStudent);
+        when(studentService.getStudentAge(anyInt())).thenReturn(listStudent);
         JSONArray jsonA = new JSONArray();
         jsonA.put(student1);
         jsonA.put(student2);

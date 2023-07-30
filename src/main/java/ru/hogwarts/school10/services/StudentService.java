@@ -3,18 +3,18 @@ package ru.hogwarts.school10.services;
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school10.model.Faculty;
 import ru.hogwarts.school10.model.Student;
-import ru.hogwarts.school10.repositories.StudentRepositoriy;
+import ru.hogwarts.school10.repositories.StudentRepository;
 
 import java.util.Collection;
 import java.util.List;
 
 
 @Service
-public class StudentServices {
-    private final StudentRepositoriy studentRepositoriy;
+public class StudentService {
+    private final StudentRepository studentRepositoriy;
 
 
-    public StudentServices(StudentRepositoriy studentRepositoriy) {
+    public StudentService(StudentRepository studentRepositoriy) {
         this.studentRepositoriy = studentRepositoriy;
     }
 

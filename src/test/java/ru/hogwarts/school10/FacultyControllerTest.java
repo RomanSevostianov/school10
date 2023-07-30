@@ -13,8 +13,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import ru.hogwarts.school10.controller.FacultyController;
 import ru.hogwarts.school10.model.Faculty;
-import ru.hogwarts.school10.repositories.FacultyRepositoriy;
-import ru.hogwarts.school10.repositories.StudentRepositoriy;
+import ru.hogwarts.school10.repositories.FacultyRepository;
+import ru.hogwarts.school10.repositories.StudentRepository;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -28,10 +28,10 @@ public class FacultyControllerTest {
 
 
     @MockBean
-    FacultyRepositoriy facultyRepositoriy;
+    FacultyRepository facultyRepositoriy;
 
     @MockBean
-    StudentRepositoriy studentRepositoriy;
+    StudentRepository studentRepositoriy;
 
     @Autowired
     ObjectMapper objectMapper;

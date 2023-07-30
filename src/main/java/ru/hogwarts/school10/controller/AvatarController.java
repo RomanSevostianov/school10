@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school10.model.Avatar;
-import ru.hogwarts.school10.services.AvatarServices;
+import ru.hogwarts.school10.services.AvatarService;
 
 
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ import java.nio.file.Path;
 @RequestMapping("avatar")
 public class AvatarController {
 
-    public AvatarServices avatarServices;
+    public AvatarService avatarService;
 
     //Post - создание
     @PostMapping(value = "/studentId}/avatar", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -31,13 +31,13 @@ public class AvatarController {
         if (avatar.getSize() > 1024 * 300) {
             return ResponseEntity.badRequest().body("Фаил слишком большой");
         }
-        avatarServices.uploadAvatar(studentId, avatar);
+        avatarService.uploadAvatar(studentId, avatar);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "{id}/cover/preview")
     public ResponseEntity<byte[]> downloardCover(@PathVariable long id) {
-        Avatar avatar = avatarServices.findAvatar(id);
+        Avatar avatar = avatarService.findAvatar(id);
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -50,7 +50,7 @@ public class AvatarController {
 
     @GetMapping(value = "{id}/cover")
     public void dounloadCover(@PathVariable Long id, HttpServletResponse responce) throws IOException {
-        Avatar avatar = avatarServices.findAvatar(id);
+        Avatar avatar = avatarService.findAvatar(id);
 
         Path path = Path.of(avatar.getFilePath());
 

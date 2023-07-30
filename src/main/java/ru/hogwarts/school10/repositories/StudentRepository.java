@@ -9,7 +9,7 @@ import ru.hogwarts.school10.model.Student;
 import java.util.Collection;
 import java.util.List;
 
-public interface StudentRepositoriy extends JpaRepository<Student, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
     void deleteById (Long id);
 
     Collection<Student> findAll(Student student);
