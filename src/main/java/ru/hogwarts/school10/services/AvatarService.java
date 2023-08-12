@@ -2,6 +2,8 @@ package ru.hogwarts.school10.services;
 
 
 import jakarta.transaction.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,7 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 @Transactional
 public class AvatarService {
 
+    private final Logger logger = LoggerFactory.getLogger(AvatarService.class);
     @Value("${path.to.avatars.folder}")
     private String avatarsDir;
 
@@ -38,6 +41,8 @@ public class AvatarService {
     }
 
     public void uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
+        logger.info("Method uploadAvatar");
+
         Student student = studentService.getStudentId(studentId);
 
         Path filePath = Path.of(avatarsDir, studentId + "." + getExtensions(avatarFile.getOriginalFilename()));
@@ -74,28 +79,32 @@ public class AvatarService {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
             BufferedImage image = ImageIO.read(bis);
 
-            int height = image.getHeight()/(image.getWidth()/100);
-            BufferedImage preview = new BufferedImage(100,height,image.getType());
+            int height = image.getHeight() / (image.getWidth() / 100);
+            BufferedImage preview = new BufferedImage(100, height, image.getType());
             Graphics2D graphics = preview.createGraphics();
-            graphics.drawImage(image,0,0,100,height,null);
+            graphics.drawImage(image, 0, 0, 100, height, null);
             graphics.dispose();
 
-            ImageIO.write(preview,getExtensions(filePath.getFileName().toString()),baos);
+            ImageIO.write(preview, getExtensions(filePath.getFileName().toString()), baos);
             return baos.toByteArray();
         }
     }
 
     public Avatar findAvatar(Long Id) {
+        logger.info("Method findAvatar");
         return avatarRepositoriy.findAvatarByIdStudent(Id).orElse(new Avatar());
 
     }
+
     private String getExtensions(String fileName) {
+        logger.info("Method getExtensions");
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
-    public List<Avatar> getAllAvatar (Integer pageNumber, Integer numberSize){
+    public List<Avatar> getAllAvatar(Integer pageNumber, Integer numberSize) {
+        logger.info("Method getAllAvatar");
 
-        PageRequest pageRequest = PageRequest.of(pageNumber-1,numberSize);
+        PageRequest pageRequest = PageRequest.of(pageNumber - 1, numberSize);
         return avatarRepositoriy.findAll(pageRequest).getContent();
     }
 

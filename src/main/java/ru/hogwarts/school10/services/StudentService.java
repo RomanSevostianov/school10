@@ -54,9 +54,6 @@ public class StudentService {
     }
 
 
-
-
-
     public List<Student> getLastStudent(int count) {
         return studentRepositoriy.getLastStudent(count);
     }
