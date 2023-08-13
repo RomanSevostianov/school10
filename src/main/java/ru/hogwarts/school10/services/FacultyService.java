@@ -5,6 +5,7 @@ import ru.hogwarts.school10.model.Faculty;
 import ru.hogwarts.school10.repositories.FacultyRepository;
 
 import java.util.Collection;
+import java.util.Comparator;
 
 @Service
 public class FacultyService {
@@ -39,4 +40,10 @@ public class FacultyService {
     }
 
 
+    public String getLongNameByFaculty() {
+        return facultyRepositoriy.findAll().stream()
+                .map(Faculty::getName)
+                .sorted(Comparator.comparing(String::length, Comparator.reverseOrder()))
+                .findFirst().get();
+    }
 }

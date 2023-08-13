@@ -19,7 +19,7 @@ public class StudentController {
     }
 
     @GetMapping("{age}")
-    public ResponseEntity<Student> findStudentAge (@PathVariable int age){
+    public ResponseEntity<Student> findStudentAge(@PathVariable int age) {
         studentService.getStudentAge(age);
         return ResponseEntity.ok().build();
 
@@ -42,7 +42,6 @@ public class StudentController {
         studentService.editStudent(student);
         return ResponseEntity.ok().build();
     }
-
 
 
     @DeleteMapping("{id}")
@@ -85,7 +84,19 @@ public class StudentController {
 
 
     @GetMapping("/lastStudent")
-    public List<Student> getLastStudent(@RequestParam (value = "count",defaultValue = "5")int count) {
+    public List<Student> getLastStudent(@RequestParam(value = "count", defaultValue = "5") int count) {
         return studentService.getLastStudent(Math.abs(count));
+    }
+
+
+    //Поиск по первой букве студента
+    @GetMapping("/firstLetter/{letter}")
+    public List<String> getStudentByFirstLetter(@PathVariable("letter") String letter) {
+        return studentService.getStudentByFirstLetter(letter);
+    }
+
+    @GetMapping("aveAgeStudent")
+    public double getAvaregeAgeStudent() {
+        return studentService.getAvaregeAgeByStudent ();
     }
 }

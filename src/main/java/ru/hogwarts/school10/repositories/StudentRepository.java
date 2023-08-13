@@ -20,6 +20,7 @@ public interface StudentRepository extends JpaRepository<Student, Long> {
 
     Collection<Student> findByStudentOrderByFacultyId(Faculty faculty);
 
+    List <Student> findStudentByLetter (Character letter);
 
     @Query(value = "SELECT COUNT(s) FROM Student s")
     int getCountOfStudent();

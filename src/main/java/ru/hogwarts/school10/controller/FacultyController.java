@@ -49,4 +49,10 @@ public class FacultyController {
         return ResponseEntity.ok(facultyService.findAllFaculty());
     }
 
+    @GetMapping ("/longNameFaculty")
+    public String findLongNameByFaculty (){
+        return facultyService.getLongNameByFaculty ();
+        }
+
+
 }
