@@ -91,4 +91,71 @@ public class StudentService {
                 .limit(1_000_000)
                 .reduce(0, (a, b) -> a + b);
     }
+
+    public List<String> getThreadNameStudent() {
+        List<String> threadNameStudent = studentRepositoriy.findAll().stream()
+                .map(Student::getName)
+                .limit(6)
+                .collect(Collectors.toList());
+
+        System.out.println(threadNameStudent.get(0));
+        System.out.println(threadNameStudent.get(1));
+
+        new Thread(() -> {
+            try {
+                System.out.println(threadNameStudent.get(2));
+                Thread.sleep(3000);
+                System.out.println(threadNameStudent.get(3));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                System.out.println(threadNameStudent.get(4));
+                Thread.sleep(3000);
+                System.out.println(threadNameStudent.get(5));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+        return threadNameStudent;
+    }
+
+    private synchronized void getNamePrintStudent(String name) {
+        System.out.println(name);
+    }
+
+
+    public List<String> getThreadNameStudentSyns() {
+        List<String> threadNameStudent = studentRepositoriy.findAll().stream()
+                .map(Student::getName)
+                .limit(6)
+                .collect(Collectors.toList());
+
+        getNamePrintStudent(threadNameStudent.get(0));
+        getNamePrintStudent(threadNameStudent.get(1));
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                getNamePrintStudent(threadNameStudent.get(2));
+                getNamePrintStudent(threadNameStudent.get(3));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000);
+                getNamePrintStudent(threadNameStudent.get(4));
+                getNamePrintStudent(threadNameStudent.get(5));
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }).start();
+        return threadNameStudent;
+    }
 }

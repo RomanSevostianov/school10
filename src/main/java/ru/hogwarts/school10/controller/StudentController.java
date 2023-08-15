@@ -99,4 +99,10 @@ public class StudentController {
     public double getAvaregeAgeStudent() {
         return studentService.getAvaregeAgeByStudent ();
     }
+
+    @GetMapping("/threadName")
+
+    public List<String> getThreadName (){
+        return studentService.getThreadNameStudent ();
+    }
 }
